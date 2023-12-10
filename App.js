@@ -14,27 +14,28 @@ import { SignUpPage } from "./components/signup/signup.page";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { app } from "./firebaseConfig";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState(null);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [initializing, setInitializing] = useState(true);
+  // const [user, setUser] = useState(null);
   const auth = getAuth(app);
   useEffect(() => {
-    auth;
-  }, []);
-  const onAuthStateChangedHandler = (user) => {
-    setUser(user);
-    if (initializing) {
-      setInitializing(false);
-    }
-  };
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, onAuthStateChangedHandler);
-    return unsubscribe;
+    signInWithEmailAndPassword(auth, "admin@root.com", "admin1234")
+      .then((userCredential) => {
+        console.log("users", userCredential);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   }, []);
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
