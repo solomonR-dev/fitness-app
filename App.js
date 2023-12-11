@@ -15,9 +15,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { app } from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { createStackNavigator } from "@react-navigation/stack";
+import { SessionList } from "./components/workout-session/session-list";
+import { CurrentSession } from "./components/workout-session/current-session";
 
 const Tab = createBottomTabNavigator();
-
+const Stack = createStackNavigator();
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [initializing, setInitializing] = useState(true);
@@ -45,6 +48,27 @@ export default function App() {
 
   if (!oswaldLoaded || !latoLoaded) return null;
 
+  const ExcercicesScreen = () => {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="Exercice"
+          component={RestaurantScreen}
+          options={{ title: "Session list" }}
+        />
+        <Stack.Screen
+          name="SessionList"
+          component={SessionList}
+          options={{ title: "Session List" }}
+        />
+        <Stack.Screen
+          name="CurrentSession"
+          component={CurrentSession}
+          options={{ title: "Workout" }}
+        />
+      </Stack.Navigator>
+    );
+  };
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
@@ -76,8 +100,8 @@ export default function App() {
           />
           <Tab.Screen
             name="Exercice"
-            component={RestaurantScreen}
-            options={{ title: "Choose an excercice" }}
+            component={ExcercicesScreen}
+            options={{ title: "Workout list" }}
           />
         </Tab.Navigator>
       </NavigationContainer>

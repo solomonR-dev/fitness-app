@@ -48,7 +48,7 @@ const workout = [
     rating: 7,
   },
 ];
-export const RestaurantScreen = () => {
+export const RestaurantScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
@@ -56,7 +56,7 @@ export const RestaurantScreen = () => {
           data={workout}
           renderItem={({ item }) => (
             <View style={{ margin: 10 }}>
-              <ExercicesInfos training={item} />
+              <ExercicesInfos training={item} navigation={navigation} />
             </View>
           )}
           keyExtractor={(e) => e.name}

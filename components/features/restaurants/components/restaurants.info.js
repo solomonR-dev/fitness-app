@@ -49,11 +49,15 @@ const SectionEnd = styled.View`
   justify-content: flex-end;
 `;
 
-export default ExercicesInfos = ({ training }) => {
+export default ExercicesInfos = ({ training, navigation }) => {
   const { name, description, photo, rating } = training;
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
-    <ExerciceCard style={styles.container} elevation={5}>
+    <ExerciceCard
+      onPress={() => navigation.navigate("SessionList")}
+      style={styles.container}
+      elevation={5}
+    >
       <Cover key={name} source={{ uri: photo }} />
       <Content>
         <Title>{name}</Title>

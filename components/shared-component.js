@@ -25,6 +25,10 @@ export const HeaderText = styled(Text)`
   line-height: 30px; /* 150% */
 `;
 
+export const BoldText = styled(Text)`
+  font-weight: 700;
+`;
+
 export const SubGrayedText = styled(Text)`
   color: var(--gray-2, #ada4a5);
   font-family: Poppins;
