@@ -1,17 +1,21 @@
 import React, { createContext, useContext, useState } from "react";
 import { loginRequest } from "./authentication.service";
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const onLogin = (email, password) => {
     setIsLoading(true);
-    loginRequest(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         setUser(user);
         setIsLoading(false);
@@ -22,9 +26,9 @@ export const AuthenticationContextProvider = ({ children }) => {
       });
   };
 
-  const onRegister = (email, userName, password, repeatedPass) => {
+  const onRegister = (email, password, confirmedPassword) => {
     setIsLoading(true);
-    if (password !== repeatedPass) {
+    if (password !== confirmedPassword) {
       setError("Error: Passwords do not match");
     }
     createUserWithEmailAndPassword(auth, email, password)
@@ -41,7 +45,7 @@ export const AuthenticationContextProvider = ({ children }) => {
   const onLogout = () => {
     signOut(auth).then(() => {
       setUser(null);
-      setError(null);
+      setError([]);
     });
   };
   return (
