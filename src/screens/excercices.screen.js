@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, SafeAreaView, StatusBar, View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components";
-import ExercicesInfos from "../../components/features/restaurants/components/restaurants.info";
+import ExercicesInfos from "../../components/features/restaurants/components/excercices.info";
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
 `;
@@ -48,7 +48,7 @@ const workout = [
     rating: 7,
   },
 ];
-export const RestaurantScreen = () => {
+export const ExercicesScreen = () => {
   return (
     <SafeArea>
       <Container>

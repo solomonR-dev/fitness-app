@@ -49,11 +49,27 @@ const SectionEnd = styled.View`
   justify-content: flex-end;
 `;
 
-export default ExercicesInfos = ({ training }) => {
+{
+  /*
+<Button
+        elevation={5}
+        onPress={() => navigation.navigate("SignUpPage")}
+        mode="contained-tonal"
+      >
+        Login
+      </Button>
+
+*/
+}
+
+export default ExercicesInfos = ({ navigation, training }) => {
   const { name, description, photo, rating } = training;
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
-    <ExerciceCard style={styles.container} elevation={5}>
+    <ExerciceCard
+      // onPress={() => navigation.navigate("CurrentSession")}
+      elevation={5}
+    >
       <Cover key={name} source={{ uri: photo }} />
       <Content>
         <Title>{name}</Title>

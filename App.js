@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
-import { RestaurantScreen } from "./src/screens/excercices.screen";
+import { ExercicesScreen } from "./src/screens/excercices.screen";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -13,13 +13,15 @@ import { LoginPage } from "./components/login/login.page";
 import { SignUpPage } from "./components/signup/signup.page";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
-import { app } from "./firebaseConfig";
+import { app, auth, db } from "./firebaseConfig";
 import {
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { CurrentSession } from "./components/current-session/current-session";
+import { ListSession } from "./components/current-session/session-list";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,15 +29,18 @@ export default function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   // const [initializing, setInitializing] = useState(true);
   // const [user, setUser] = useState(null);
-  const auth = getAuth(app);
+  // const auth = getAuth(app);
   useEffect(() => {
+    // if (!app.name) {
+    console.log("signIn");
     signInWithEmailAndPassword(auth, "admin@root.com", "admin1234")
       .then((userCredential) => {
-        console.log("users", userCredential);
+        // console.log("users", userCredential);
       })
       .catch((error) => {
         console.log("error", error);
       });
+    // }
   }, []);
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -77,8 +82,13 @@ export default function App() {
           />
           <Tab.Screen
             name="Exercice"
-            component={RestaurantScreen}
+            component={ExercicesScreen}
             options={{ title: "Choose an excercice" }}
+          />
+          <Tab.Screen
+            name="CurrentSession"
+            component={ListSession}
+            options={{ title: "Current session" }}
           />
         </Tab.Navigator>
       </NavigationContainer>
