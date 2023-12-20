@@ -5,9 +5,6 @@ import { useRoute } from "@react-navigation/native";
 import { Text } from "react-native-paper";
 import { CustomCountDown } from "./counter";
 import { RoundedButton } from "./rounded-button";
-// import CountDown from "react-native-countdown-component";
-// import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-
 export const CurrentSession = ({ navigation }) => {
   const route = useRoute();
   const sessionDetails = route.params.currentWorkout;
