@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 export const AuthenticationContext = createContext();
 
@@ -48,6 +49,25 @@ export const AuthenticationContextProvider = ({ children }) => {
       setError([]);
     });
   };
+
+  const addData = async (dailyBurn) => {
+    var dateObject = new Date();
+    var dayOfWeek = dateObject.getUTCDay();
+    var daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    var dayName = daysOfWeek[dayOfWeek];
+    await setDoc(doc(db, "workoutProgress", dayName), {
+      name: dayName,
+      calories: dailyBurn,
+    });
+  };
   return (
     <AuthenticationContext.Provider
       value={{
@@ -58,6 +78,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         onLogin,
         onRegister,
         onLogout,
+        addData,
       }}
     >
       {children}

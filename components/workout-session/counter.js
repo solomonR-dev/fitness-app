@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
-
-// import { fontSizes, spacing } from "../utils/sizes";
-
 import { fontSizes } from "../../src/infrastructure/theme/fonts";
 
 const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
-
 export const CustomCountDown = ({
   minutes = 1,
   isPaused = false,
@@ -15,9 +11,7 @@ export const CustomCountDown = ({
   onEnd = () => {},
 }) => {
   const interval = React.useRef(null);
-
   const [millis, setMillis] = useState(null);
-
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
@@ -29,23 +23,18 @@ export const CustomCountDown = ({
       return timeLeft;
     });
   };
-
   useEffect(() => {
     setMillis(minutesToMillis(minutes));
   }, [minutes]);
-
   useEffect(() => {
     onProgress(millis / minutesToMillis(minutes));
   }, [millis]);
-
   useEffect(() => {
     if (isPaused) {
       if (interval.current) clearInterval(interval.current);
       return;
     }
-
     interval.current = setInterval(countDown, 1000);
-
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
