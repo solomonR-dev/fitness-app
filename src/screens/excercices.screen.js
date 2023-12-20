@@ -1,20 +1,15 @@
 import React from "react";
-import { FlatList, SafeAreaView, StatusBar, View } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { FlatList, SafeAreaView, View } from "react-native";
 import styled from "styled-components";
-import ExercicesInfos from "../../components/features/restaurants/components/restaurants.info";
+import ExercicesInfos from "../../components/features/restaurants/components/exercices.info";
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
-`;
-const SearchContainer = styled(View)`
-  padding: ${(props) => props.theme.space[3]};
 `;
 const Container = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
-
 const TrainingList = styled(FlatList).attrs({
   // contentContainerStyle: { paddingTop: 16 },
 })``;

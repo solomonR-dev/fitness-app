@@ -10,6 +10,7 @@ import { SignUpPage } from "../components/signup/signup.page";
 import { LoginPage } from "../components/login/login.page";
 import { AuthenticationContext } from "../service/authentication.context";
 import { AccountSettings } from "../components/settings/account-settings";
+import { MyProfile } from "../components/myprofile/myprofile.infos";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -18,11 +19,11 @@ export const AppNavigator = () => {
   const { isAuthenticated } = useContext(AuthenticationContext);
   const ExcercicesScreen = () => {
     return (
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
         <Stack.Screen
           name="ExercicesList"
           component={ExercicesList}
-          options={{ title: "List of group" }}
+          options={{ title: "" }}
         />
         <Stack.Screen
           name="SessionList"
@@ -33,6 +34,11 @@ export const AppNavigator = () => {
           name="CurrentSession"
           component={CurrentSession}
           options={{ title: "Workout" }}
+        />
+        <Stack.Screen
+          name="MyProfile"
+          component={MyProfile}
+          options={{ title: "My Profile" }}
         />
       </Stack.Navigator>
     );
@@ -54,6 +60,8 @@ export const AppNavigator = () => {
                 iconName = focused ? "barschart" : "barschart";
               } else if (route.name === "Settings") {
                 iconName = focused ? "setting" : "setting";
+              } else if (route.name === "MyProfile") {
+                iconName = focused ? "user" : "user";
               }
               return <AntDesign name={iconName} size={size} color={color} />;
             },
@@ -66,7 +74,12 @@ export const AppNavigator = () => {
               <Tab.Screen
                 name="ExcercicesScreen"
                 component={ExcercicesScreen}
-                options={{ title: "Workout list" }}
+                options={{ title: "Maxi-FIT" }}
+              />
+              <Tab.Screen
+                name="MyProfile"
+                component={MyProfile}
+                options={{ title: "My Profile" }}
               />
               <Tab.Screen
                 name="Settings"

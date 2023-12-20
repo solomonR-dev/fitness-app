@@ -2,17 +2,29 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import { BoldText, CenterdView, HeaderText } from "../shared-component";
 import { Avatar, Card, Text } from "react-native-paper";
-import { fullBody } from "./group-list";
+import { excerciceCategory, fullBody } from "./group-list";
 import { formatTime } from "../../utils";
+import { useRoute } from "@react-navigation/native";
 
-export const SessionList = ({ group, navigate }) => {
-  const session = fullBody;
-  const groupName = "Full body";
+export const SessionList = ({ group, navigation }) => {
+  const route = useRoute();
+  const groupName = route.params.excerciceCategory;
+  const rawSessionData = excerciceCategory?.map((s, index) => {
+    if (s.name === groupName) return s.items;
+  });
+  const session = rawSessionData.filter(Boolean)[0];
   const UniqCard = ({ item }) => {
     const { calorie, isTime, name, value } = item;
     return (
       <View>
-        <Card style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}>
+        <Card
+          onPress={() =>
+            navigation.navigate("CurrentSession", {
+              currentWorkout: item,
+            })
+          }
+          style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
+        >
           <View
             style={{
               flex: 1,
@@ -31,12 +43,16 @@ export const SessionList = ({ group, navigate }) => {
               <Avatar.Icon size={40} icon="google-fit" />
               <View style={{ marginLeft: 20 }}>
                 <BoldText>{name}</BoldText>
-                <Text>{isTime ? formatTime(value) : value + "x"}</Text>
+                <Text>
+                  {isTime
+                    ? `${formatTime(value) | `${calorie} calories`}`
+                    : `${value}x | ${calorie} calories`}
+                </Text>
               </View>
             </View>
             <View
               style={{
-                flex: 1,
+                // flex: 1,
                 flexGrow: 1,
               }}
             >
