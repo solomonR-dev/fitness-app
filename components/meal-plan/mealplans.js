@@ -127,57 +127,61 @@ export const MealPlans = () => {
         contentContainerStyle={containerStyle}
       >
         {/* {notification?.length && <Text>{notification}</Text>} */}
-        <Text
-          onPress={hideModal}
-          style={{ color: "blue", alignSelf: "flex-end" }}
-        >
-          Close
-        </Text>
-        <CenterdView>
-          <BoldText>Meal plan</BoldText>
-        </CenterdView>
-        <TextInput
-          value={mealInput.name}
-          style={{ margin: 10 }}
-          mode="outlined"
-          label="Name"
-          onChangeText={(e) => setMealInput((prev) => ({ ...prev, name: e }))}
-        />
-        <TextInput
-          value={mealInput.calories}
-          style={{ margin: 10 }}
-          mode="outlined"
-          label="Calories"
-          onChangeText={(e) =>
-            setMealInput((prev) => ({ ...prev, calories: e }))
-          }
-        />
-        <TextInput
-          value={mealInput.descriptions}
-          style={{ margin: 10 }}
-          mode="outlined"
-          label="Description"
-          //   placeholder="type here"
-          onChangeText={(e) =>
-            setMealInput((prev) => ({ ...prev, descriptions: e }))
-          }
-        />
-        <SelectList
-          placeholder="Select day"
-          boxStyles={{ margin: 10 }}
-          setSelected={(val) => setMealInput((prev) => ({ ...prev, day: val }))}
-          data={daysData}
-          save="value"
-        />
-        <Button
-          onPress={() => {
-            addMeal({ ...mealInput, key: uuid() });
-            toggleModal();
-          }}
-          mode="outlined"
-        >
-          Save
-        </Button>
+        <View style={{ paddingTop: 120 }}>
+          <Text
+            onPress={hideModal}
+            style={{ color: "blue", alignSelf: "flex-end" }}
+          >
+            Close
+          </Text>
+          <CenterdView>
+            <BoldText>Meal plan</BoldText>
+          </CenterdView>
+          <TextInput
+            value={mealInput.name}
+            style={{ margin: 10 }}
+            mode="outlined"
+            label="Name"
+            onChangeText={(e) => setMealInput((prev) => ({ ...prev, name: e }))}
+          />
+          <TextInput
+            value={mealInput.calories}
+            style={{ margin: 10 }}
+            mode="outlined"
+            label="Calories"
+            onChangeText={(e) =>
+              setMealInput((prev) => ({ ...prev, calories: e }))
+            }
+          />
+          <TextInput
+            value={mealInput.descriptions}
+            style={{ margin: 10 }}
+            mode="outlined"
+            label="Description"
+            //   placeholder="type here"
+            onChangeText={(e) =>
+              setMealInput((prev) => ({ ...prev, descriptions: e }))
+            }
+          />
+          <SelectList
+            placeholder="Select day"
+            boxStyles={{ margin: 10 }}
+            setSelected={(val) =>
+              setMealInput((prev) => ({ ...prev, day: val }))
+            }
+            data={daysData}
+            save="value"
+          />
+          <Button
+            onPress={() => {
+              addMeal({ ...mealInput, key: uuid() });
+              toggleModal();
+            }}
+            mode="outlined"
+          >
+            Save
+          </Button>
+        </View>
       </Modal>
     </View>
   );
