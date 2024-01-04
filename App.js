@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";

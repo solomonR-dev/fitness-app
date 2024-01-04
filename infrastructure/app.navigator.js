@@ -11,6 +11,7 @@ import { LoginPage } from "../components/login/login.page";
 import { AuthenticationContext } from "../service/authentication.context";
 import { AccountSettings } from "../components/settings/account-settings";
 import { MyProfile } from "../components/myprofile/myprofile.infos";
+import { MealPlans } from "../components/meal-plan/mealplans";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -44,6 +45,21 @@ export const AppNavigator = () => {
     );
   };
 
+  const ProfilePages = () => {
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Progress chart"
+        component={ExercicesList}
+        options={{ title: "" }}
+      />
+      <Stack.Screen
+        name="Meal plan"
+        component={SessionList}
+        options={{ title: "Session List" }}
+      />
+    </Stack.Navigator>;
+  };
+
   return (
     <NavigationContainer>
       {
@@ -62,8 +78,14 @@ export const AppNavigator = () => {
                 iconName = focused ? "setting" : "setting";
               } else if (route.name === "MyProfile") {
                 iconName = focused ? "user" : "user";
+              } else if (route.name === "MealsPlans") {
+                iconName = "rest";
               }
-              return <AntDesign name={iconName} size={size} color={color} />;
+              return (
+                <AntDesign name={iconName} size={size} color={color} /> || (
+                  <MaterialIcons name={iconName} size={size} color={color} />
+                )
+              );
             },
             tabBarActiveTintColor: "tomato",
             tabBarInactiveTintColor: "gray",
@@ -80,6 +102,11 @@ export const AppNavigator = () => {
                 name="MyProfile"
                 component={MyProfile}
                 options={{ title: "My Profile" }}
+              />
+              <Tab.Screen
+                name="MealsPlans"
+                component={MealPlans}
+                options={{ title: "Meal plans" }}
               />
               <Tab.Screen
                 name="Settings"

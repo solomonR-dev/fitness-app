@@ -11,7 +11,7 @@ export const CurrentSession = ({ navigation }) => {
   const sessionDetails = route.params.currentWorkout;
   const [isPause, setIsPaused] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const { addData } = useContext(AuthenticationContext);
+  const { addSession } = useContext(AuthenticationContext);
   return (
     <View>
       <CenterdView>
@@ -32,13 +32,26 @@ export const CurrentSession = ({ navigation }) => {
                 isPaused={isPause}
                 minutes={sessionDetails.value || 0}
                 onEnd={() => {
-                  addData(sessionDetails.calorie);
+                  addSession(sessionDetails.calorie);
                   setIsFinished(true);
                 }}
               />
             </RoundedButton>
+
             <Button compact onPress={() => setIsPaused(!isPause)}>
               {isPause ? "Continue" : " Pause"}
+            </Button>
+            <Button
+              compact
+              onPress={() => {
+                addSession({
+                  name: sessionDetails.name,
+                  calories: sessionDetails.calorie,
+                });
+                setIsFinished(true);
+              }}
+            >
+              Exercice completed
             </Button>
           </>
         )}

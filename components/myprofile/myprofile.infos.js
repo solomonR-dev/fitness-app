@@ -2,8 +2,11 @@ import { Dimensions, View } from "react-native";
 import { BoldText, CenterdView, HeaderText } from "../shared-component";
 import { Text } from "react-native-paper";
 import { LineChart } from "react-native-chart-kit";
+import { useContext } from "react";
+import { AuthenticationContext } from "../../service/authentication.context";
 
 export const MyProfile = () => {
+  const { getAllSession } = useContext(AuthenticationContext);
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
     backgroundColor: "#9EC8B9",
