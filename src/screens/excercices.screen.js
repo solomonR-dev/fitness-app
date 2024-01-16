@@ -25,23 +25,23 @@ const workout = [
     name: "Upper body",
     description: "6 Excercices | 25 mins",
     photos:
-      "https://www.trxtraining.com/cdn/shop/articles/functional-dumbbell-exercises.jpg",
+      "https://media.gq-magazine.co.uk/photos/6538f4a988a9e4c700a2bf0b/16:9/w_1920,c_limit/Full-body-workout.jpg",
     rating: 3,
   },
-  {
-    name: "Lower body",
-    description: "5 Excercices | 15 mins",
-    photos:
-      "https://www.trxtraining.com/cdn/shop/articles/functional-dumbbell-exercises.jpg",
-    rating: 3,
-  },
-  {
-    name: "Abs workout",
-    description: "8 Excercices | 12 mins",
-    photos:
-      "https://hips.hearstapps.com/hmg-prod/images/core-workouts-at-home-1666192539.png?crop=1.00xw:0.753xh;0,0.0743xh&resize=1200:*",
-    rating: 7,
-  },
+  // {
+  //   name: "Lower body",
+  //   description: "5 Excercices | 15 mins",
+  //   photos:
+  //     "https://www.trxtraining.com/cdn/shop/articles/functional-dumbbell-exercises.jpg",
+  //   rating: 3,
+  // },
+  // {
+  //   name: "Abs workout",
+  //   description: "8 Excercices | 12 mins",
+  //   photos:
+  //     "https://hips.hearstapps.com/hmg-prod/images/core-workouts-at-home-1666192539.png?crop=1.00xw:0.753xh;0,0.0743xh&resize=1200:*",
+  //   rating: 7,
+  // },
 ];
 export const ExercicesList = ({ navigation }) => {
   return (

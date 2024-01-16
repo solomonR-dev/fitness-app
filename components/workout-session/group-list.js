@@ -19,42 +19,36 @@ export const excerciceCategory = [
         isTime: true,
         value: 1,
         calorie: 25,
-        img: "../../assets/warm-up.gif",
       },
       {
         name: "Jumping Jack",
         isTime: false,
         value: 1,
         calorie: 30,
-        img: "jumpingjack.gif",
       },
       {
         name: "Skipping",
         isTime: false,
         value: 1,
         calorie: 41,
-        img: "skipping.gif",
       },
       {
         name: "Squats",
         isTime: false,
         value: 1,
         calorie: 21,
-        img: "test-workout.gif",
       },
       {
         name: "Arm Raises",
         isTime: true,
         value: 1,
         calorie: 31,
-        img: "arme-raised.gif",
       },
       {
         name: "Rest and drink",
         isTime: true,
         value: 2,
         calorie: 0,
-        img: "drink-water.gif",
       },
     ],
   },
@@ -87,3 +81,36 @@ export const excerciceCategory = [
     ],
   },
 ];
+
+export const imgSession = {
+  "Warm up": {
+    uri: require("../../assets/warm-up.gif"),
+  },
+  "Jumping Jack": {
+    uri: require("../../assets/jumpingjack.gif"),
+  },
+  Skipping: {
+    uri: require("../../assets/skipping.gif"),
+  },
+  Squats: {
+    uri: require("../../assets/test-workout.gif"),
+  },
+  "Arm Raises": {
+    uri: require("../../assets/arme-raised.gif"),
+  },
+  "Rest and drink": {
+    uri: require("../../assets/drink-water.gif"),
+  },
+  Pushups: {
+    uri: require("../../assets/full-push-up.gif"),
+  },
+  Planks: {
+    uri: require("../../assets/plank.gif"),
+  },
+  Pullups: {
+    uri: require("../../assets/pullup.gif"),
+  },
+  "Incline pushups": {
+    uri: require("../../assets/incline-pushups.gif"),
+  },
+};
