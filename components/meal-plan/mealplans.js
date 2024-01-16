@@ -5,7 +5,6 @@ import { BoldText, Button, CenterdView } from "../shared-component";
 import { SelectList } from "react-native-dropdown-select-list";
 import { DataTable, Modal, TextInput } from "react-native-paper";
 import { AuthenticationContext } from "../../service/authentication.context";
-import { v4 as uuid } from "uuid";
 const daysData = [
   { key: "1", value: "Monday" },
   { key: "2", value: "Tuesday" },
@@ -51,6 +50,9 @@ export const MealPlans = () => {
         setNotification("Something went wrong please try again");
     }
   }, [addMealFeedback]);
+  useEffect(() => {
+    getMeal();
+  }, [visible]);
   const toggleModal = () => setVisible(!visible);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -174,7 +176,7 @@ export const MealPlans = () => {
           />
           <Button
             onPress={() => {
-              addMeal({ ...mealInput, key: uuid() });
+              addMeal({ ...mealInput });
               toggleModal();
             }}
             mode="outlined"

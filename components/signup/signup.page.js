@@ -80,8 +80,8 @@ export const SignUpPage = () => {
           style={{ marginTop: "4px" }}
           elevation={5}
           onPress={() => {
-            onRegister(email, password, confirmedPassword);
-            // createUser(name, email);
+            onRegister({ email, password, confirmedPassword, name });
+            // createUser({ name, email });
           }}
           mode="contained-tonal"
         >

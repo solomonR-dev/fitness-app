@@ -53,7 +53,7 @@ export const excerciceCategory = [
         name: "Rest and drink",
         isTime: true,
         value: 2,
-        calorie: 51,
+        calorie: 0,
         img: "drink-water.gif",
       },
     ],

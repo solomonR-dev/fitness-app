@@ -53,7 +53,10 @@ export const CurrentSession = ({ navigation }) => {
                 isPaused={isPause}
                 minutes={sessionDetails.value || 0}
                 onEnd={() => {
-                  addSession(sessionDetails.calorie);
+                  addSession({
+                    name: sessionDetails.name,
+                    calories: sessionDetails.calorie,
+                  });
                   setIsFinished(true);
                 }}
               />

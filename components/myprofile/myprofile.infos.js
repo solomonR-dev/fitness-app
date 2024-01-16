@@ -2,11 +2,36 @@ import { Dimensions, View } from "react-native";
 import { BoldText, CenterdView, HeaderText } from "../shared-component";
 import { Text } from "react-native-paper";
 import { LineChart } from "react-native-chart-kit";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthenticationContext } from "../../service/authentication.context";
 
 export const MyProfile = () => {
-  const { getAllSession } = useContext(AuthenticationContext);
+  const { getAllSession, allSession, userName, getUserName } = useContext(
+    AuthenticationContext
+  );
+  console.log("allSession", allSession);
+  useEffect(() => {
+    getAllSession();
+    getAllSession();
+    getUserName();
+  }, []);
+  const allDays = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const caloriesByDay = Array(allDays.length).fill(0);
+  allSession?.forEach((item) => {
+    const dayIndex = allDays.indexOf(item.day);
+    if (dayIndex !== -1) {
+      caloriesByDay[dayIndex] += item.calories;
+    }
+  });
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
     backgroundColor: "#9EC8B9",
@@ -25,10 +50,10 @@ export const MyProfile = () => {
     },
   };
   const data = {
-    labels: ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    labels: allDays,
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43],
+        data: caloriesByDay,
         color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
         strokeWidth: 2,
       },
@@ -39,7 +64,7 @@ export const MyProfile = () => {
     <View>
       <CenterdView>
         <HeaderText style={{ padding: 10 }}>
-          Hey ! view your progress
+          {`Hey ${userName}! view your progress`}
         </HeaderText>
       </CenterdView>
       <LineChart
