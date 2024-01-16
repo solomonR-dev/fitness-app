@@ -24,7 +24,7 @@ var daysOfWeek = [
 var dayName = daysOfWeek[dayOfWeek];
 export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState([]);
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [addMealFeedback, setAddMealFeeBack] = useState(undefined);
   const [mealPlan, setMealPlan] = useState([]);
@@ -38,7 +38,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       })
       .catch((error) => {
         setIsLoading(false);
-        setError(error);
+        setError(true);
       });
   };
 
@@ -54,7 +54,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       })
       .catch((e) => {
         setIsLoading(false);
-        setError(e.toString());
+        setError(true);
       });
   };
 
@@ -74,6 +74,16 @@ export const AuthenticationContextProvider = ({ children }) => {
     });
   };
 
+  const createUser = async ({ name, email }) => {
+    console.log({ name, email });
+    return;
+    await setDoc(doc(db, "users", email), {
+      email,
+      name,
+      sessionId: "",
+    });
+  };
+
   const addMeal = async (data) => {
     const { day } = data;
     await setDoc(doc(db, "mealsPlans", day), {
@@ -81,11 +91,9 @@ export const AuthenticationContextProvider = ({ children }) => {
       key: uuid(),
     })
       .then((res) => {
-        console.log("res >>", res);
         setAddMealFeeBack(true);
       })
       .catch((err) => {
-        console.log("err", err);
         setAddMealFeeBack(false);
       });
   };
@@ -123,6 +131,8 @@ export const AuthenticationContextProvider = ({ children }) => {
         addMealFeedback,
         mealPlan,
         getAllSession,
+        setError,
+        createUser,
       }}
     >
       {children}

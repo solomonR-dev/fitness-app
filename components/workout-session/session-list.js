@@ -14,7 +14,7 @@ export const SessionList = ({ group, navigation }) => {
   });
   const session = rawSessionData.filter(Boolean)[0];
   const UniqCard = ({ item }) => {
-    const { calorie, isTime, name, value } = item;
+    const { calorie, isTime, name, value, img } = item;
     return (
       <View>
         <Card
